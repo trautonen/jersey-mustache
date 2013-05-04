@@ -4,6 +4,19 @@ jersey-mustache
 View processor implementation for Jersey to render Mustache templates
 
 
+Maven dependencies
+------------------
+
+Release versions are available in the Apache maven repository.
+
+```xml
+<dependency>
+    <groupId>org.eluder.jersey</groupId>
+    <artifactId>jersey-mustache</artifactId>
+    <version>0.9.0-SNAPSHOT</version>
+</dependency>
+```
+
 Continuous integration
 ----------------------
 
