@@ -13,7 +13,7 @@ Release versions are available in the Apache maven repository.
 <dependency>
     <groupId>org.eluder.jersey</groupId>
     <artifactId>jersey-mustache</artifactId>
-    <version>0.9.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
