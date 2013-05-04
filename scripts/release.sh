@@ -49,7 +49,8 @@ mvn clean > /dev/null
 
 echo "Updating license information"
 mvn license:update-project-license license:update-file-header > /dev/null
-git commit -am "Updated license information."
+git add -A
+git commit -m "Updated license information."
 
 $script_dir/bump-version.sh $release_version
 
