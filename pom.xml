@@ -9,7 +9,7 @@
 
 	<groupId>org.eluder.jersey</groupId>
 	<artifactId>jersey-mustache</artifactId>
-	<version>0.9.5-SNAPSHOT</version>
+	<version>0.9.5</version>
 
 	<name>jersey-mustache</name>
 	<description>View processor implementation for Jersey to render Mustache templates</description>
