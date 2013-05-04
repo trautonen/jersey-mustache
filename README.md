@@ -1,13 +1,13 @@
 jersey-mustache
 ===============
 
-View processor implementation for Jersey to render Mustache templates
+View processor implementation for Jersey to render {{ mustache }} templates
 
 
-Maven dependencies
+Maven artifacts
 ------------------
 
-Release versions are available in the Apache maven repository.
+Release versions of jersey-mustache are available at the Apache Maven central repository.
 
 ```xml
 <dependency>
