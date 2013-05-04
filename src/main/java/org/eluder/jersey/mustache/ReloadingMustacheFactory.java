@@ -35,19 +35,42 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
+/**
+ * Extension for default mustache factory to allow template reloading. This is extremely usefull
+ * in development environment, where you can change the template when the application server is
+ * running and it will be automatically refreshed. {@link #builder()} provides builder that can be
+ * used to set the factory parameters dynamically.
+ */
 public class ReloadingMustacheFactory extends DefaultMustacheFactory {
     
+    /** Value for disabling template reloading. */
     private static final int ETERNAL_CACHE_VALUE = -1;
+    
+    /** Default template expiration time in milliseconds. */
     private static final int DEFAULT_CACHE_EXPIRY = 3000;
     
+    /**
+     * Creates a new reloading mustache factory with the default values.
+     */
     public ReloadingMustacheFactory() {
         super();
     }
 
+    /**
+     * Creates a new reloading mustache factory with the given file system root.
+     * 
+     * @param fileRoot the root folder for templates in file system
+     */
     public ReloadingMustacheFactory(final File fileRoot) {
         super(fileRoot);
     }
 
+    /**
+     * Creates a new reloading mustache factory with the given resource root. Should not contain
+     * leading slash.
+     * 
+     * @param resourceRoot the root folder for templates in classpath
+     */
     public ReloadingMustacheFactory(final String resourceRoot) {
         super(resourceRoot);
     }
@@ -62,6 +85,9 @@ public class ReloadingMustacheFactory extends DefaultMustacheFactory {
         return builder.build(createMustacheCacheLoader());
     }
 
+    /**
+     * @return the cache loader for mustache templates
+     */
     protected CacheLoader<String, Mustache> createMustacheCacheLoader() {
         return new CacheLoader<String, Mustache>() {
             @Override
@@ -71,34 +97,66 @@ public class ReloadingMustacheFactory extends DefaultMustacheFactory {
         };
     }
     
+    /**
+     * @return the template expiration time in milliseconds
+     */
     protected int getTemplateExpiryMillis() {
         return DEFAULT_CACHE_EXPIRY;
     }
     
+    /**
+     * Helper method to create factory builder.
+     * 
+     * @return the factory builder
+     */
     public static Builder builder() {
         return new Builder();
     }
     
+    /**
+     * Builder that can be used to dynamically set the template expiration time.
+     */
     public static class Builder {
         private File fileRoot;
         private String resourceRoot;
         private int templateExpiryMillis = DEFAULT_CACHE_EXPIRY;
         
+        /**
+         * Sets the file system root.
+         * 
+         * @param fileRoot the root folder for templates in file system
+         * @return this for method chaining
+         */
         public Builder fileRoot(final File fileRoot) {
             this.fileRoot = fileRoot;
             return this;
         }
         
+        /**
+         * Sets the resource root. Should not contain leading slash.
+         * 
+         * @param resourceRoot the root folder for templates in classpath
+         * @return this for method chaining
+         */
         public Builder resourceRoot(final String resourceRoot) {
             this.resourceRoot = resourceRoot;
             return this;
         }
         
+        /**
+         * Sets the template expiration time.
+         * 
+         * @param templateExpiryMillis the template expiration time in milliseconds
+         * @return this for method chaining
+         */
         public Builder templateExpiryMillis(final int templateExpiryMillis) {
             this.templateExpiryMillis = templateExpiryMillis;
             return this;
         }
         
+        /**
+         * @return the built reloading mustache factory
+         */
         public ReloadingMustacheFactory build() {
             if (resourceRoot != null) {
                 return new ReloadingMustacheFactory(resourceRoot) {
