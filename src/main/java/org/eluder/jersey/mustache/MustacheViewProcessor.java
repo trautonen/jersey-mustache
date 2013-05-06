@@ -122,7 +122,7 @@ public class MustacheViewProcessor implements ViewProcessor<Mustache> {
         
         // render the actual template
         OutputStreamWriter writer = new OutputStreamWriter(out);
-        t.execute(writer, getScope(viewable)).flush();
+        t.execute(writer, getScope(viewable)).close();
     }
 
     /**
