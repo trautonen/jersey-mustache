@@ -7,7 +7,7 @@ View processor implementation for [Jersey](http://jersey.java.net/) to render
 
 #### Maven artifacts
 
-Release versions of jersey-mustache are available at the [http://search.maven.org/](Central repository). Snapshots are
+Release versions of jersey-mustache are available at the [Central repository](http://search.maven.org/). Snapshots are
 available at the [Sonatype OSS repository](https://oss.sonatype.org/).
 
 ```xml
@@ -27,7 +27,8 @@ The only dependencies for jersey-mustache are [Jersey](http://jersey.java.net/) 
 
 #### Continuous integration
 
-Travis CI builds jersey-mustache with Oracle JDK 7.
+Travis CI builds jersey-mustache with Oracle JDK 7. All successfully built snapshots are deployed to Sonatype OSS
+repository.
 
 [![Build Status](https://travis-ci.org/trautonen/jersey-mustache.png)](https://travis-ci.org/trautonen/jersey-mustache)
 
