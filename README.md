@@ -1,12 +1,14 @@
 jersey-mustache
 ===============
 
-View processor implementation for [Jersey](http://jersey.java.net/) to render [{{ mustache }}](http://mustache.github.io/) templates.
+View processor implementation for [Jersey](http://jersey.java.net/) to render
+[{{ mustache }}](http://mustache.github.io/) templates.
 
 
 #### Maven artifacts
 
-Release versions of jersey-mustache are available at the Apache Maven central repository.
+Release versions of jersey-mustache are available at the [http://search.maven.org/](Central repository). Snapshots are
+available at the [Sonatype OSS repository](https://oss.sonatype.org/).
 
 ```xml
 <dependency>
@@ -19,12 +21,13 @@ Release versions of jersey-mustache are available at the Apache Maven central re
 
 #### Dependencies
 
-The only dependencies for jersey-mustache are [Jersey](http://jersey.java.net/) and [Mustache.java](https://github.com/spullara/mustache.java). Though 
+The only dependencies for jersey-mustache are [Jersey](http://jersey.java.net/) and
+[Mustache.java](https://github.com/spullara/mustache.java).
 
 
 #### Continuous integration
 
-Travis CI builds jersey-mustache with Oracle JDK 7 and OpenJDK 6.
+Travis CI builds jersey-mustache with Oracle JDK 7.
 
 [![Build Status](https://travis-ci.org/trautonen/jersey-mustache.png)](https://travis-ci.org/trautonen/jersey-mustache)
 
