@@ -14,4 +14,4 @@ env:
     - secure: "NFS9RLJnfkUpTlvDZgZPLVqMarO4bkwojdzwSGPZHnjQQjzo8G5lhiA7ni11\nL6iyaBj4fL/l46dIMMKYXNU9IRxBs6P3GNNVLvYi5wn7nFf+jdTEYDPoCjY3\nDxY1n4CIbMZjGMMfChccdHXrA0lLMJGnEWOwUM0UzvV7WX7VxWo="
 
 after_success:
-  - grep '\-SNAPSHOT</version>' pom.xml && python scripts/sonatype.py && mvn clean deploy --settings ~/.m2/mySettings.xml
+  - grep '\-SNAPSHOT</version>' pom.xml && python scripts/travis-sonatype.py && mvn clean deploy --settings ~/.m2/mySettings.xml
