@@ -14,7 +14,7 @@ available at the [Sonatype OSS repository](https://oss.sonatype.org/).
 <dependency>
     <groupId>org.eluder.jersey</groupId>
     <artifactId>jersey-mustache</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
