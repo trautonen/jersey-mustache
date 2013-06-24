@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.eluder</groupId>
 		<artifactId>eluder-parent</artifactId>
-		<version>2</version>
+		<version>3</version>
 	</parent>
 
 	<groupId>org.eluder.jersey</groupId>
@@ -106,4 +106,30 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<profiles>
+		<profile>
+			<id>travis</id>
+			<activation>
+				<property>
+					<name>env.TRAVIS</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eluder.coveralls</groupId>
+						<artifactId>coveralls-maven-plugin</artifactId>
+						<version>1.0.0</version>
+						<configuration>
+							<serviceName>travis-ci</serviceName>
+							<serviceJobId>${env.TRAVIS_JOB_ID}</serviceJobId>
+							<branch>${env.TRAVIS_BRANCH}</branch>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
