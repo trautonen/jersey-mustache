@@ -1,6 +1,9 @@
 jersey-mustache
 ===============
 
+[![Build Status](https://travis-ci.org/trautonen/jersey-mustache.png)](https://travis-ci.org/trautonen/jersey-mustache)
+[![Coverage Status](https://coveralls.io/repos/trautonen/jersey-mustache/badge.png?branch=master)](https://coveralls.io/r/trautonen/jersey-mustache?branch=master)
+
 View processor implementation for [Jersey](http://jersey.java.net/) to render
 [{{ mustache }}](http://mustache.github.io/) templates.
 
@@ -66,9 +69,7 @@ The only dependencies for jersey-mustache are [Jersey](http://jersey.java.net/) 
 #### Continuous integration
 
 Travis CI builds jersey-mustache with Oracle JDK 7. All successfully built snapshots are deployed to Sonatype OSS
-repository.
-
-[![Build Status](https://travis-ci.org/trautonen/jersey-mustache.png)](https://travis-ci.org/trautonen/jersey-mustache)
+repository. Unit test code coverage is reported on every successfull build to Coveralls web service.
 
 
 #### License
