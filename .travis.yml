@@ -12,10 +12,13 @@ env:
     - secure: "c9wdZ+Tt8noXtNjcNXRP5KgKhqgF+7igWyE9ReFO54yJgqhOsx+V96BDsaU4\nkfQZCiGRvnH1ASlpWjx+932C84ncpNNO/iLeyNVsoOceIlvHfX6iPzu8Pqr1\nbQ8Da2QZ/ZbM07NcNE6v2nWBDz8m7St452i1pGID7jq+S0t+Mn0="
     - secure: "NFS9RLJnfkUpTlvDZgZPLVqMarO4bkwojdzwSGPZHnjQQjzo8G5lhiA7ni11\nL6iyaBj4fL/l46dIMMKYXNU9IRxBs6P3GNNVLvYi5wn7nFf+jdTEYDPoCjY3\nDxY1n4CIbMZjGMMfChccdHXrA0lLMJGnEWOwUM0UzvV7WX7VxWo="
 
-script: mvn clean verify jacoco:report coveralls:jacoco
-
 before_install:
   - git submodule update --init --recursive
 
+before_script:
+  - python etc/travis-sonatype.py
+
+script: python scripts/travis-build.py --settings ~/.m2/sonatype.xml
+
 after_success:
-  - grep '\-SNAPSHOT</version>' pom.xml && python etc/travis-sonatype.py && mvn -Pprepare-deploy clean deploy --settings ~/.m2/mySettings.xml
+  - mvn jacoco:report coveralls:jacoco
