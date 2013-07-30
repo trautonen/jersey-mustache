@@ -18,4 +18,4 @@ before_install:
   - git submodule update --init --recursive
 
 after_success:
-  - grep '\-SNAPSHOT</version>' pom.xml && python scripts/travis-sonatype.py && mvn -Pprepare-deploy clean deploy --settings ~/.m2/mySettings.xml
+  - grep '\-SNAPSHOT</version>' pom.xml && python etc/travis-sonatype.py && mvn -Pprepare-deploy clean deploy --settings ~/.m2/mySettings.xml
