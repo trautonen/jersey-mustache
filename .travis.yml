@@ -2,7 +2,6 @@ language: java
 
 jdk:
   - oraclejdk7
-  - openjdk7
 
 env:
   global:
@@ -10,7 +9,6 @@ env:
     - secure: "NFS9RLJnfkUpTlvDZgZPLVqMarO4bkwojdzwSGPZHnjQQjzo8G5lhiA7ni11\nL6iyaBj4fL/l46dIMMKYXNU9IRxBs6P3GNNVLvYi5wn7nFf+jdTEYDPoCjY3\nDxY1n4CIbMZjGMMfChccdHXrA0lLMJGnEWOwUM0UzvV7WX7VxWo="
 
 before_install:
-  - sudo sed -i 's/security.provider.9/#security.provider.9/g' $JAVA_HOME/jre/lib/security/java.security
   - git submodule update --init --recursive
 
 before_script:
