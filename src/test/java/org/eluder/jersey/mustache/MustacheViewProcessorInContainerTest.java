@@ -28,24 +28,25 @@ package org.eluder.jersey.mustache;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import javax.ws.rs.core.Application;
 
-import com.sun.jersey.api.core.PackagesResourceConfig;
-import com.sun.jersey.test.framework.JerseyTest;
-import com.sun.jersey.test.framework.WebAppDescriptor;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.test.JerseyTest;
+import org.junit.Test;
 
 public class MustacheViewProcessorInContainerTest extends JerseyTest {
     
-    public MustacheViewProcessorInContainerTest() {
-        super(new WebAppDescriptor.Builder()
-                .initParam(PackagesResourceConfig.PROPERTY_PACKAGES, "org.eluder.jersey.mustache")
-                .initParam(MustacheViewProcessor.MUSTACHE_TEMPLATE_EXPIRY, "2000")
-                .build());
+    @Override
+    protected Application configure() {
+        return new ResourceConfig()
+            .register(MustacheMvcFeature.class)
+            .packages("org.eluder.jersey.mustache")
+            .property(MustacheViewProcessor.MUSTACHE_TEMPLATE_EXPIRY, "2000");
     }
     
     @Test
     public void testRenderTemplate() {
-        String response = resource().path("mustache").get(String.class);
+        String response = target("mustache").request().get(String.class);
         assertEquals("this is bar bar", response);
     }
 }

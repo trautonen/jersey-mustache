@@ -30,21 +30,23 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 
+import javax.ws.rs.core.MediaType;
+
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.mvc.Viewable;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.github.mustachejava.Mustache;
-import com.sun.jersey.api.core.DefaultResourceConfig;
-import com.sun.jersey.api.view.Viewable;
 
 public class MustacheViewProcessorTest {
     
-    private DefaultResourceConfig resourceConfig;
+    private ResourceConfig resourceConfig;
     private MustacheViewProcessor mustacheViewProcessor;
     
     @Before
     public void init() {
-        resourceConfig = new DefaultResourceConfig();
+        resourceConfig = new ResourceConfig();
         mustacheViewProcessor = new MustacheViewProcessor(resourceConfig);
     }
     
@@ -52,8 +54,8 @@ public class MustacheViewProcessorTest {
     public void testResolveAndWriteTo() throws Exception {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Viewable viewable = new Viewable("template.mustache", new Context());
-        Mustache mustache = mustacheViewProcessor.resolve(viewable.getTemplateName());
-        mustacheViewProcessor.writeTo(mustache, viewable, stream);
+        Mustache mustache = mustacheViewProcessor.resolve(viewable.getTemplateName(), MediaType.TEXT_HTML_TYPE);
+        mustacheViewProcessor.writeTo(mustache, viewable, MediaType.TEXT_HTML_TYPE, stream);
         assertEquals("this is foo bar", stream.toString());
     }
     

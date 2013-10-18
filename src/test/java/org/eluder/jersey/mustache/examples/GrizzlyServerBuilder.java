@@ -37,15 +37,13 @@ import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.Servlet;
 
-import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.DefaultServlet;
 import org.glassfish.grizzly.servlet.FilterRegistration;
 import org.glassfish.grizzly.servlet.ServletRegistration;
 import org.glassfish.grizzly.servlet.WebappContext;
 import org.glassfish.grizzly.utils.ArraySet;
-
-import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
+import org.glassfish.jersey.grizzly2.servlet.GrizzlyWebContainerFactory;
 
 public class GrizzlyServerBuilder {
 
@@ -98,7 +96,7 @@ public class GrizzlyServerBuilder {
     }
     
     public void start() throws Exception {
-        HttpServer server = GrizzlyServerFactory.createHttpServer(URI.create(url), (HttpHandler) null);
+        HttpServer server = GrizzlyWebContainerFactory.create(URI.create(url));
         WebappContext webapp = new WebappContext("GrizzlyContext", context);
         if (servlet == null) {
             servlet = DummyServlet.class;
@@ -116,7 +114,7 @@ public class GrizzlyServerBuilder {
         
         System.out.println(String.format("Jersey application started at %s\nHit enter to stop it...", url));
         System.in.read();
-        server.stop();
+        server.shutdownNow();
     }
 
     private void registerServlet(final WebappContext webapp) {

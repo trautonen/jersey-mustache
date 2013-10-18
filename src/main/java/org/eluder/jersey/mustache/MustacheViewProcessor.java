@@ -30,18 +30,20 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import javax.inject.Singleton;
+import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.Provider;
 
 import org.eluder.jersey.mustache.util.MustacheFactoryHelper;
 import org.eluder.jersey.mustache.util.ResourceConfigHelper;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.mvc.Viewable;
+import org.glassfish.jersey.server.mvc.spi.TemplateProcessor;
 
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import com.sun.jersey.api.core.ResourceConfig;
-import com.sun.jersey.api.view.Viewable;
-import com.sun.jersey.spi.resource.Singleton;
-import com.sun.jersey.spi.template.ViewProcessor;
 
 /**
  * View processor implementation to render mustache templates. The mustache factory can be
@@ -65,7 +67,7 @@ import com.sun.jersey.spi.template.ViewProcessor;
  */
 @Singleton
 @Provider
-public class MustacheViewProcessor implements ViewProcessor<Mustache> {
+public class MustacheViewProcessor implements TemplateProcessor<Mustache> {
     
     /** Folder in file system for mustache templates. */
     public static final String MUSTACHE_FILE_ROOT       = "mustache.file.root";
@@ -86,8 +88,8 @@ public class MustacheViewProcessor implements ViewProcessor<Mustache> {
      * 
      * @param resourceConfig the resource config
      */
-    public MustacheViewProcessor(@Context final ResourceConfig resourceConfig) {
-        ResourceConfigHelper config = new ResourceConfigHelper(resourceConfig);
+    public MustacheViewProcessor(@Context final Configuration configuration) {
+        ResourceConfigHelper config = new ResourceConfigHelper(configuration);
         String factoryClass = config.getStringProperty(MUSTACHE_FACTORY_CLASS);
         String resourceRoot = config.getStringProperty(MUSTACHE_RESOURCE_ROOT);
         String fileRoot = config.getStringProperty(MUSTACHE_FILE_ROOT);
@@ -107,22 +109,22 @@ public class MustacheViewProcessor implements ViewProcessor<Mustache> {
     }
     
     @Override
-    public Mustache resolve(final String name) {
+    public Mustache resolve(final String name, final MediaType mediaType) {
         String relative = name;
         if (relative.charAt(0) == '/') {
             relative = relative.substring(1);
         }
         return compile(relative);
     }
-
+    
     @Override
-    public void writeTo(final Mustache t, final Viewable viewable, final OutputStream out) throws IOException {
+    public void writeTo(final Mustache templateReference, final Viewable viewable, final MediaType mediaType, final OutputStream out) throws IOException {
         // send status and headers
         out.flush();
         
         // render the actual template
         OutputStreamWriter writer = new OutputStreamWriter(out);
-        t.execute(writer, getScope(viewable)).close();
+        templateReference.execute(writer, getScope(viewable)).close();
     }
 
     /**

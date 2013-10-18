@@ -29,10 +29,10 @@ package org.eluder.jersey.mustache.util;
 import java.io.File;
 
 import org.eluder.jersey.mustache.ReloadingMustacheFactory;
+import org.glassfish.jersey.server.ContainerException;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.MustacheFactory;
-import com.sun.jersey.api.container.ContainerException;
 
 public final class MustacheFactoryHelper {
 

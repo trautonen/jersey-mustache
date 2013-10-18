@@ -39,7 +39,6 @@ import com.google.inject.Singleton;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
-import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
 public class MustacheGuiceExample {
 
@@ -64,7 +63,7 @@ public class MustacheGuiceExample {
         
         @Override
         protected void configureServlets() {
-            filter("/*").through(GuiceContainer.class);
+            //filter("/*").through(GuiceContainer.class);
             
             bind(GuiceResource.class).in(Singleton.class);
         }

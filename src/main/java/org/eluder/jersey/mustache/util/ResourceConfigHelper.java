@@ -26,13 +26,13 @@ package org.eluder.jersey.mustache.util;
  * %[license]
  */
 
-import com.sun.jersey.api.core.ResourceConfig;
+import javax.ws.rs.core.Configuration;
 
 public final class ResourceConfigHelper {
 
-    private final ResourceConfig config;
+    private final Configuration config;
     
-    public ResourceConfigHelper(final ResourceConfig config) {
+    public ResourceConfigHelper(final Configuration config) {
         this.config = config;
     }
 
