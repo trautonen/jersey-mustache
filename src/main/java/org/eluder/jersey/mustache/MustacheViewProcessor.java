@@ -38,7 +38,6 @@ import javax.ws.rs.ext.Provider;
 
 import org.eluder.jersey.mustache.util.MustacheFactoryHelper;
 import org.eluder.jersey.mustache.util.ResourceConfigHelper;
-import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.mvc.Viewable;
 import org.glassfish.jersey.server.mvc.spi.TemplateProcessor;
 
@@ -48,7 +47,7 @@ import com.github.mustachejava.MustacheFactory;
 /**
  * View processor implementation to render mustache templates. The mustache factory can be
  * configured from the servlet or filter init parameters, or straight from the
- * {@link ResourceConfig} or manually creating an instance of the processor supplying a mustache
+ * {@link Configuration} or manually creating an instance of the processor supplying a mustache
  * factory instance.
  * <p>
  * Jersey will instantiate the view processor automatically if this class is available for the
@@ -86,7 +85,7 @@ public class MustacheViewProcessor implements TemplateProcessor<Mustache> {
     /**
      * Creates a new mustache view processor from the init parameters defined in resource config.
      * 
-     * @param resourceConfig the resource config
+     * @param configuration the configuration
      */
     public MustacheViewProcessor(@Context final Configuration configuration) {
         ResourceConfigHelper config = new ResourceConfigHelper(configuration);
